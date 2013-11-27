@@ -1,11 +1,11 @@
-all:
-	clean
-	_build
+all: clean _build
 
 publish: clean _build _test
+	rm -rf tasks/meta.json
+	npm publish ./
 	echo 'done'
 
-_build:
+_build: clean
 	node build/build.js
 
 _test:

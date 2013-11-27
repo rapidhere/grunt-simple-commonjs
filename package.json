@@ -1,24 +1,42 @@
 {
-  "name": "simple-commonjs",
-  "version": "0.1.1",
-  "description": "A simple common js wrapper to tar a CommonJS project into a single file for client-side usage",
+  "name": "grunt-simple-common",
+  "description": "A Simple tool that wrapper a CommonJS Project into a single file for client side usage",
+  "version": "0.1.0",
   "homepage": "https://github.com/rapidhere/simple-commonjs",
-  "repository": "https://github.com/rapidhere/simple-commonjs",
-  "bugs": {
-    "url": "https://github.com/rapidhere/simple-commonjs/issues",
+  "author": {
+    "name": "rapidhere",
     "email": "rapidhere@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rapidhere/simple-commonjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rapidhere/simple-commonjs/issues"
   },
   "licenses": [
-  {
-    "type": "LGPL",
-    "url": "http://www.gnu.org/licenses/lgpl-3.0.txt"
-  }
+    {
+      "type": "LGPL",
+      "url": "http://www.gnu.org/licenses/lgpl-3.0.txt"
+    }
   ],
-  "author" : {
-    "name": "Rapid Here",
-    "email": "rapidhere@gmail.com"
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-  }
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
 }

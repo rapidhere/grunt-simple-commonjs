@@ -1,0 +1,7 @@
+{
+  "defaultOptions": {
+    "standalone": false,
+    "main": null
+  },
+  "runnerJS": "runner-here"
+}

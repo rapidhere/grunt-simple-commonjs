@@ -1,0 +1,24 @@
+{
+  "name": "simple-commonjs",
+  "version": "0.1.1",
+  "description": "A simple common js wrapper to tar a CommonJS project into a single file for client-side usage",
+  "homepage": "https://github.com/rapidhere/simple-commonjs",
+  "repository": "https://github.com/rapidhere/simple-commonjs",
+  "bugs": {
+    "url": "https://github.com/rapidhere/simple-commonjs/issues",
+    "email": "rapidhere@gmail.com"
+  },
+  "licenses": [
+  {
+    "type": "LGPL",
+    "url": "http://www.gnu.org/licenses/lgpl-3.0.txt"
+  }
+  ],
+  "author" : {
+    "name": "Rapid Here",
+    "email": "rapidhere@gmail.com"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+  }
+}

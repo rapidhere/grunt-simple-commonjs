@@ -4,17 +4,17 @@
   "email": "rapidhere@gmail.com",
   "description": "A Simple tool that wrapper a CommonJS Project into a single file for client side usage",
   "version": "0.1.0",
-  "homepage": "https://github.com/rapidhere/simple-commonjs",
+  "homepage": "https://github.com/rapidhere/grunt-simple-commonjs",
   "author": {
     "name": "rapidhere",
     "email": "rapidhere@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rapidhere/simple-commonjs.git"
+    "url": "https://github.com/rapidhere/grunt-simple-commonjs"
   },
   "bugs": {
-    "url": "https://github.com/rapidhere/simple-commonjs/issues"
+    "url": "https://github.com/rapidhere/grunt-simple-commonjs/issues"
   },
   "licenses": [
     {

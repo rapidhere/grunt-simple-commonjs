@@ -1,8 +1,8 @@
 all: clean _build
 
 publish: clean _build _test
-	rm -rf tasks/meta.json
 	npm publish ./
+	rm -rf tasks/meta.json
 	echo 'done'
 
 _build: clean

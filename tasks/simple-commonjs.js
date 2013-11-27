@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         createNewDist(dest);
 
         // Generate target
-        build(filePair, dest);
+        build(filePair, options.main);
       } catch(e) {
         success = false;
         grunt.log.warn('Build Failed!' +
@@ -68,12 +68,6 @@ module.exports = function(grunt) {
     });
   });
   
-  var SHA1 = function(str) {
-      var f = crypto.createHash('sha1');
-      f.update(str);
-      return f.digest('hex');
-  };
-
   var createNewDist = function(filepath) {
     if(grunt.file.exists(filepath)) {
         throw 'Destination file ' + filepath + ' existed!';
@@ -82,7 +76,7 @@ module.exports = function(grunt) {
     grunt.file.write(filepath, meta.runnerJS);
   };
 
-  var build = function(filePair, dest) {
+  var build = function(filePair, main) {
     var buffer = '';
 
     filePair.src.forEach(function(filepath) {
@@ -93,20 +87,20 @@ module.exports = function(grunt) {
       }
       
       // wrap buffer
-      var moduleId = SHA1(filepath);
       var modulePath = filepath;
       var moduleContent = grunt.file.read(filepath);
 
-      buffer += 'moduleList._' + moduleId + ' = {' +
+      buffer += 'moduleList["' + modulePath + '"] = {' +
         'module: ' + 'function(require, exports, module) {' +
           moduleContent + 
         '},' +
-        'path: "' + modulePath + '",' + 
       '};';
     });
   
-    var destBuffer = grunt.file.read(dest);
+    var destBuffer = grunt.file.read(filePair.dest);
     destBuffer = destBuffer.replace('// inner-code', buffer + '\n');
-    grunt.file.write(dest, destBuffer);
+    // Wirte Main Id
+    destBuffer = destBuffer.replace('0;// mainPath', "'" + main + "';");
+    grunt.file.write(filePair.dest, destBuffer);
   };
 };

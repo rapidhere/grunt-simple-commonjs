@@ -14,7 +14,7 @@
   var fs = require('fs');
 
   var jsonBuffer = fs.readFileSync('build/_meta.json', 'utf-8');
-  var runnerBuffer = fs.readFileSync('tasks/runner.js', 'utf-8');
+  var runnerBuffer = fs.readFileSync('tasks/lib/runner.js', 'utf-8');
 
   //Escape 
   runnerBuffer = runnerBuffer.replace(/\\/g, '\\\\');

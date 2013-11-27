@@ -40,12 +40,6 @@ grunt.initConfig({
 
 ### Options
 
-#### options.standalone
-Type: `boolean`
-Default value: `true`
-
-To build a standalone javascript that donesn't use extra CommonJS wrapper
-
 #### options.main
 Type: `String`
 Default value: null
@@ -53,6 +47,14 @@ Default value: null
 The entry of your programm
 
 ### Usage Examples
+
+The test show a simple Example
+You can use make example to see it
+
+### Build from code
+```bash
+$ make
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

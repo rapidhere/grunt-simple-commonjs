@@ -1,4 +1,6 @@
-all: publish
+all:
+	clean
+	_build
 
 publish: clean _build _test
 	echo 'done'

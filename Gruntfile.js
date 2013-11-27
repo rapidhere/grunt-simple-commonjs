@@ -30,22 +30,23 @@ module.exports = function(grunt) {
     'simple-commonjs': {
       default_options: {
         options: {
-          main: 'test/fixtures/index.js',
+          main: 'test/index.js',
         },
         files: {
-          'dist/index.js': ['test/fixtures/**/*.js'],
+          'dist/index.js': ['test/**/*.js'],
         },
       },
       custom_options: {
         options: {
           standalone: false,
-          main: 'test/fixtures/index.js',
+          main: 'test/index.js',
         },
         files: {
-          'dist/index.js': ['test/fixtures/**/*.js'],
+          'dist/index.js': ['test/**/*.js'],
         },
       },
     },
+
   });
   // Load plugin
   grunt.loadTasks('tasks');

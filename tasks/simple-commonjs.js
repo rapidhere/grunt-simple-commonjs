@@ -10,7 +10,6 @@
 
 /* Options:
  *  files: src, dest
- *  standalone: true=runner wrapper
  *  main: the entry of the programm
  */
 

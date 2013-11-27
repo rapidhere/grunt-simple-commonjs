@@ -42,14 +42,14 @@
       var d = dir2[i];
       if(d === '.') {
         continue;
-      } else if(d === '..' && dir2.join('/') !== rootPath) {
-        dir2 = dir2.slice(0, dir2.length - 1);
+      } else if(d === '..' && dir1.join('/') !== rootPath) {
+        dir1 = dir1.slice(0, dir1.length - 1);
       } else {
-        dir2.push(d);
+        dir1.push(d);
       }
     }
 
-    return dir2.join('/');
+    return dir1.join('/');
   };
   
   // Module Class
@@ -62,7 +62,9 @@
   };
   
   Module.prototype.require = function(path) {
-    path = pathJoin(this._path, path);
+    var p = this._path.split('/');
+    p = p.slice(0, p.length - 1);
+    path = pathJoin(p.join('/'), path);
     
     if(moduleCache[path] !== undefined) {
       return moduleCache[path]._export;
@@ -76,8 +78,13 @@
 
   Module.prototype.run = function() {
     moduleCache[this._path] = this;
+    
+    var obj = this;
+    var wrap_require = function(path) {
+      return obj.require(path);
+    };
 
-    this._code(this.require, this._export, undefined);
+    this._code(wrap_require, this._export, undefined);
   };
   
   // Read metas

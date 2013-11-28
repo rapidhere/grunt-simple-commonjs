@@ -118,6 +118,9 @@ module.exports = function(grunt) {
       }
     });
     
+    // need to escape $ first T T
+    buffer = buffer.replace(/\$/g, '$$$$');
+
     // Write into buffer
     var destBuffer = grunt.file.read(filePair.dest);
     destBuffer = destBuffer.replace('// inner-code', buffer + '\n');

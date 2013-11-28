@@ -11,6 +11,7 @@ _build: clean
 _test:
 	grunt lint
 	grunt test
+	node dist/index.js
 
 clean:
 	rm -rf tasks/meta.json dist

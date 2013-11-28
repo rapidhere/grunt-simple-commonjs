@@ -24,75 +24,51 @@
   // inner-code
   // End of inner code
 
-  var mainPath = 0;// mainPath
+  var mainId = 0;// mainId
   // Here is the Virtual Machine
   var moduleCache = {};
-
-  // utils:
-  var rootPath = mainPath;
-  var pathJoin = function(dir1, dir2) {
-    // assume that dir1 is abs
-    if(dir2.charAt(0) === '/') {
-      return dir2;
-    }
-    
-    dir2 = dir2.split('/');
-    dir1 = dir1.split('/');
-    for(var i = 0;i < dir2.length;i ++) {
-      var d = dir2[i];
-      if(d === '.') {
-        continue;
-      } else if(d === '..' && dir1.join('/') !== rootPath) {
-        dir1 = dir1.slice(0, dir1.length - 1);
-      } else {
-        dir1.push(d);
-      }
-    }
-
-    return dir1.join('/');
-  };
   
   // Module Class
-  var Module = function(code, path) {
+  var Module = function(code, id) {
     this._code = code;
-    this._path = path;
+    this._id = id;
 
     this._export = {};
     // TODO: this._module = {exports: this._exports};
   };
   
-  Module.prototype.require = function(path) {
-    var p = this._path.split('/');
-    p = p.slice(0, p.length - 1);
-    path = pathJoin(p.join('/'), path);
-    
-    if(moduleCache[path] !== undefined) {
-      return moduleCache[path]._export;
-    } else if(moduleList[path] !== undefined) {
-      moduleList[path].run();
-      return moduleCache[path]._export;
+  Module.prototype.require = function(id) {
+    if(moduleCache[id] !== undefined) {
+      return moduleCache[id]._export;
+    } else if(moduleList[id] !== undefined) {
+      moduleList[id].run();
+      return moduleCache[id]._export;
     } else {
-      throw this._path + ': Cannot import module ' + path;
+      throw 'Cannot import module!';
     }
   };
 
   Module.prototype.run = function() {
-    moduleCache[this._path] = this;
+    moduleCache[this._id] = this;
     
     var obj = this;
-    var wrap_require = function(path) {
-      return obj.require(path);
+    var wrap_require = function(id) {
+      return obj.require(id);
     };
 
     this._code(wrap_require, this._export, undefined);
   };
   
   // Read metas
-  for(var path in moduleList) {
-      var meta = moduleList[path];
-      moduleList[path] = new Module(meta.module, path);
+  for(var id in moduleList) {
+      var meta = moduleList[id];
+      moduleList[id] = new Module(meta.module, id);
   }
 
   // Run main
-  moduleList[mainPath].run();
+  if(moduleList[mainId] !== undefined) {
+    moduleList[mainId].run();
+  } else {
+    throw 'Main entry not found!';
+  }
 })();

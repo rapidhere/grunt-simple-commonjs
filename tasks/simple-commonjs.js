@@ -19,8 +19,9 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
   
   // Load default Options from json
-  var crypto = require("crypto");
-  var meta = require("./meta");
+  var meta = require('./meta');
+  var fspath = require('path');
+  var crypto = require('crypto');
 
   grunt.registerMultiTask('simple-commonjs', 'A Simple tool that wrapper a CommonJS Project into a single file for client side usage', function() {
     // Grunt task goes here
@@ -66,6 +67,12 @@ module.exports = function(grunt) {
       }
     });
   });
+
+  var SHA1 = function(cont) {
+    var f = crypto.createHash('sha1');
+    f.update(cont);
+    return f.digest('hex');
+  };
   
   var createNewDist = function(filepath) {
     if(grunt.file.exists(filepath)) {
@@ -86,20 +93,29 @@ module.exports = function(grunt) {
       }
       
       // wrap buffer
-      var modulePath = filepath;
+      var modulePath = fspath.resolve(filepath);
       var moduleContent = grunt.file.read(filepath);
 
-      buffer += 'moduleList["' + modulePath + '"] = {' +
+      // Scan up requires and replace with SHA1 id
+      var reg = /\brequire\s*\(\s*[\'\"](.*)[\'\"]\s*\)/g;
+      var repfunc = function(ori, path) {
+        path = fspath.resolve(modulePath, '..', path);
+        return 'require("' + SHA1(path) + '")';
+      };
+      moduleContent = moduleContent.replace(reg, repfunc);
+
+      buffer += 'moduleList["' + SHA1(modulePath) + '"] = {' +
         'module: ' + 'function(require, exports, module) {' +
           moduleContent + 
         '},' +
       '};';
     });
-  
+    
+    // Write into buffer
     var destBuffer = grunt.file.read(filePair.dest);
     destBuffer = destBuffer.replace('// inner-code', buffer + '\n');
-    // Wirte Main Id
-    destBuffer = destBuffer.replace('0;// mainPath', "'" + main + "';");
+    // Write Main Id
+    destBuffer = destBuffer.replace('0;// mainId', "'" + SHA1(fspath.resolve(main)) + "';");
     grunt.file.write(filePair.dest, destBuffer);
   };
 };

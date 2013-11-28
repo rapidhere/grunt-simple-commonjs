@@ -55,12 +55,18 @@ Type: `String`
 Default value: null
 
 The entry of your programm
+
 Note that this option is required
 
 ### Usage Examples
 
 The test show a simple Example
-You can use make example to see it
+
+You can use `make example` to see it
+
+If you don't get full code, you can't get it on my github
+
+And if you don't want to get it, the gruntfile of test should be the example shows above
 
 ### Build from code
 

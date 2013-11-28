@@ -1,6 +1,11 @@
 # grunt-simple-commonjs
 
 > A Simple tool that wrapper a CommonJS Project into a single file for client side usage
+> Note that this is just a simple CommonJS wrapper
+> Currently you can only use require, exports, and module.exports
+> And only .json and .js files can be imported
+> This plugin is still under development, for issues please contact me on github
+> And I'm a freshman in fudan university, this is my first plugin for Grunt, thx for supporting me :)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
@@ -26,12 +31,11 @@ In your project's Gruntfile, add a section named `simple-commonjs` to the data o
 grunt.initConfig({
   'simple-commonjs': {
     options: {
-        standalone: true,
         main: 'src/index.js'
     },
     all: {
         files: {
-            'dist/index.js': ['src/**/*.js']
+            'dist/index.js': ['src/**/*.js', 'src/**/*.json']
         }
     },
   },
@@ -45,6 +49,7 @@ Type: `String`
 Default value: null
 
 The entry of your programm
+Note that this option is required
 
 ### Usage Examples
 
@@ -52,6 +57,7 @@ The test show a simple Example
 You can use make example to see it
 
 ### Build from code
+
 ```bash
 $ make
 ```

@@ -91,6 +91,8 @@ module.exports = function(grunt) {
         grunt.log.warn('Source file ' + filepath + ' not found.\n');
         return ;
       }
+
+      grunt.log.ok('Found source file ' + filepath + ' ...');
       
       // wrap buffer
       var modulePath = fspath.resolve(filepath);

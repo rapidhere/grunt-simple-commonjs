@@ -33,16 +33,17 @@
     this._code = code;
     this._id = id;
 
-    this._export = {};
-    // TODO: this._module = {exports: this._exports};
+    this._module = {
+        exports: {}
+    };
   };
   
   Module.prototype.require = function(id) {
     if(moduleCache[id] !== undefined) {
-      return moduleCache[id]._export;
+      return moduleCache[id]._module.exports;
     } else if(moduleList[id] !== undefined) {
       moduleList[id].run();
-      return moduleCache[id]._export;
+      return moduleCache[id]._module.exports;
     } else {
       throw 'Cannot import module!';
     }
@@ -56,7 +57,7 @@
       return obj.require(id);
     };
 
-    this._code(wrap_require, this._export, undefined);
+    this._code(wrap_require, this._module.exports, this._module);
   };
   
   // Read metas

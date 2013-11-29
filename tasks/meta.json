@@ -1,0 +1,10 @@
+{
+  "defaultOptions": {
+    "main": null
+  },
+  "supportedExt": [
+    ".js",
+    ".json"
+  ],
+  "runnerJS": "/*\n * grunt-simple-common\n * https://github.com/rapidhere/simple-commonjs\n *\n * Copyright (c) 2013 rapidhere\n * Licensed under the LGPL license.\n */\n\n/*\n * This is the outter runner of simple common js\n * all of the files will compress to this file and\n * the this runner will run this file as a Node or CommonJS VM\n *\n * These files will wrapped by grunt-simple-commonjs firstly\n */\n\n'use strict';\n\n(function() {\n  // List of Modules\n  var moduleList = {};\n\n  // Inner code goes here\n  // inner-code\n  // End of inner code\n\n  var mainId = 0;// mainId\n  // Here is the Virtual Machine\n  var moduleCache = {};\n  \n  // Module Class\n  var Module = function(code, id) {\n    this._code = code;\n    this._id = id;\n\n    this._module = {\n        exports: {},\n        id: this._id,\n    };\n  };\n  \n  Module.prototype.require = function(id) {\n    if(moduleCache[id] !== undefined) {\n      return moduleCache[id]._module.exports;\n    } else if(moduleList[id] !== undefined) {\n      moduleList[id].run();\n      return moduleCache[id]._module.exports;\n    } else {\n      throw 'Cannot import module!';\n    }\n  };\n\n  // A module can only run once, then we'll store it in the cache\n  Module.prototype.run = function() {\n    moduleCache[this._id] = this;\n    \n    var obj = this;\n    var wrap_require = function(id) {\n      return obj.require(id);\n    };\n\n    this._code(wrap_require, this._module.exports, this._module);\n    // code run only once\n    delete this._code;\n\n    // Set the id back\n    this._module.id = this._id;\n  };\n  \n  // Read metas\n  for(var id in moduleList) {\n      var meta = moduleList[id];\n      moduleList[id] = new Module(meta.module, id);\n  }\n\n  // Run main\n  if(moduleList[mainId] !== undefined) {\n    moduleList[mainId].run();\n  } else {\n    throw 'Main entry not found!';\n  }\n})();\n"
+}

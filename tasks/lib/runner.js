@@ -34,7 +34,8 @@
     this._id = id;
 
     this._module = {
-        exports: {}
+        exports: {},
+        id: this._id,
     };
   };
   
@@ -49,6 +50,7 @@
     }
   };
 
+  // A module can only run once, then we'll store it in the cache
   Module.prototype.run = function() {
     moduleCache[this._id] = this;
     
@@ -58,6 +60,11 @@
     };
 
     this._code(wrap_require, this._module.exports, this._module);
+    // code run only once
+    delete this._code;
+
+    // Set the id back
+    this._module.id = this._id;
   };
   
   // Read metas

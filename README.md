@@ -5,9 +5,12 @@
 ## Note
 This is just a simple CommonJS wrapper
 
-Currently you can only use require, exports, and module.exports
+Currently we support these CommonJS specifications:
+    1. you can use `require()` to import port a .js file or .json file. Dependency Cycle is allowed.
+    2. you can use `exports` variable to set the out interface of the module.
+    3. you can use `module` variable to handle the module. `module.exports` is equal to `exports`, and `module.id` is the identifier of the module wich you can import with `require(id)`.
 
-And only .json and .js files can be imported
+Note that, because this is 'simple', `module.id` is not readonly(in specification this should be read only). And if you change `module.id`, there will be no affection on the truly id of the module.
 
 This plugin is still under development, for issues please contact me on github
 
@@ -66,9 +69,11 @@ You can use `make example` to see it
 
 If you don't get full code, you can't get it on my github
 
-And if you don't want to get it, the gruntfile of test should be the example shows above
+And if you don't want to get it, the gruntfile of test should be the example shows above, just replace 'src' with 'test'
 
 ### Build from code
+
+Just run:
 
 ```bash
 $ make

@@ -6,9 +6,9 @@
 This is just a simple CommonJS wrapper
 
 Currently we support these CommonJS specifications:
-    1. you can use `require()` to import port a .js file or .json file. Dependency Cycle is allowed.
-    2. you can use `exports` variable to set the out interface of the module.
-    3. you can use `module` variable to handle the module. `module.exports` is equal to `exports`, and `module.id` is the identifier of the module wich you can import with `require(id)`.
+1. you can use `require()` to import port a .js file or .json file. Dependency Cycle is allowed.
+2. you can use `exports` variable to set the out interface of the module.
+3. you can use `module` variable to handle the module. `module.exports` is equal to `exports`, and `module.id` is the identifier of the module wich you can import with `require(id)`.
 
 Note that, because this is 'simple', `module.id` is not readonly(in specification this should be read only). And if you change `module.id`, there will be no affection on the truly id of the module.
 

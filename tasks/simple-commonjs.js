@@ -110,11 +110,11 @@ module.exports = function(grunt) {
 
       if(moduleContent !== null) {
         buffer += 
-          'moduleList["' + SHA1(filepath) + '"] = {' +
-            'module: ' + 'function(require, exports, module) {' +
-              moduleContent + 
-            '},' +
-          '};';
+          'moduleList["' + SHA1(filepath) + '"] = {\n' +
+          'module: ' + 'function(require, exports, module) {\n' +
+             moduleContent + 
+          '},\n' +
+          '};\n';
       }
     });
     

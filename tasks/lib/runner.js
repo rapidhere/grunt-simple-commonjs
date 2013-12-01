@@ -46,7 +46,7 @@ Module.prototype.require = function(id) {
     moduleList[id].run();
     return moduleCache[id]._module.exports;
   } else {
-    throw 'Cannot import module!';
+    throw new Error('Cannot import module!');
   }
 };
 
@@ -77,7 +77,7 @@ for(var id in moduleList) {
 if(moduleList[mainId] !== undefined) {
   moduleList[mainId].run();
 } else {
-  throw 'Main entry not found!';
+  throw new Error('Main entry not found!');
 }
 
 })();

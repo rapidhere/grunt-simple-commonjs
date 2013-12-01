@@ -33,7 +33,7 @@ module.exports = function(grunt) {
           main: 'test/index.js',
         },
         files: {
-          'dist/index.js': ['test/**/*.js', 'test/**/*.json'],
+          'dist/index.js': ['test/**/*.js'],
         },
       },
       custom_options: {

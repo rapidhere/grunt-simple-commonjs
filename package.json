@@ -2,8 +2,8 @@
   "name": "grunt-simple-commonjs",
   "auth": "rapidhere",
   "email": "rapidhere@gmail.com",
-  "description": "A Simple tool that wrapper a CommonJS Project into a single file for client side usage",
-  "version": "0.2.4",
+  "description": "A Simple tool that wrap a CommonJS Project into a single file for client side usage",
+  "version": "0.2.5",
   "homepage": "https://github.com/rapidhere/grunt-simple-commonjs",
   "author": {
     "name": "rapidhere",
